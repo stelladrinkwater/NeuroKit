@@ -218,3 +218,4 @@ studies/complexity_eeg/data_attractor.csv
 studies/complexity_eeg/data_delay.csv
 testing.ipynb
 
+docs/Makefile
