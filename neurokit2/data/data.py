@@ -224,12 +224,16 @@ def data(dataset="bio_eventrelated_100hz"):
 
     # TODO: Add more EEG (fif and edf datasets)
     if dataset in ["eeg_1min_200hz"]:
-
-        return pickle.load(
+        raw = pickle.load(
             urllib.request.urlopen(
                 "https://github.com/neuropsychology/NeuroKit/blob/dev/data/eeg_1min_200hz.pickle?raw=true"
             )
         )
+        # Fix for MNE compatibility
+        if hasattr(raw.info, 'proj_id') and isinstance(raw.info.proj_id, np.ndarray) and raw.info.proj_id.size == 1:
+            raw.info['proj_id'] = int(raw.info.proj_id[0])
+        else:
+            raw.info.proj_id = None
 
     # General case
     file, ext = os.path.splitext(dataset)  # pylint: disable=unused-variable
