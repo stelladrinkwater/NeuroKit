@@ -104,7 +104,7 @@ def test_eeg_badchannels():
     assert results_simple.loc[0, "Median"] == 3.0
     assert results_simple.loc[0, "Amplitude"] == 4.0
 
-    # test the standardization and bad channel detection logic
+    # test standardizaion and bad channel detection logic
     extreme_data = np.array([[1, 1, 1, 1, 1], [1000, 2000, 3000, 4000, 5000]])
     bads_extreme, results_extreme = nk.eeg_badchannels(extreme_data, bad_threshold=0.1, distance_threshold=0.5)
     assert 1 in [int(x) for x in bads_extreme]
